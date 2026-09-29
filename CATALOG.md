@@ -19,4 +19,5 @@ Install `emailawesome` first for product use. The technical recipes remain avail
 - [Appointment Setting Campaign Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-appointment-setting-campaign-skill)
 - [Recruiting Email Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-recruiting-candidate-outreach-skill)
 - [PR Media Pitch and Journalist Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-pr-media-pitch-prep-skill)
-- [B2B Event Invitation Email Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-b2b-event-invitation-skill)
+
+B2B event invitations are included in [the Cold Outreach event recipe](https://github.com/EmailAwesome/emailawesome-b2b-cold-outreach-skill/blob/main/skills/b2b-cold-outreach-campaign/references/event-invitations.md); they do not require a separate repository or installation.
