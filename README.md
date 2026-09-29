@@ -1,12 +1,12 @@
 # Email Awesome Email Verification Skill for Addresses and Lists
 
-The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use Email Awesome without an MCP. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, guides Warm-up setup, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
+The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use Email Awesome without an MCP. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, inspects requested sender setup in the current interface, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
 
 Use it to check addresses or lists with [Email Awesome](https://www.emailawesome.com/), inspect final statuses, and decide which records need review. The skill supplies instructions; the agent still needs compatible browser tools and access to your authenticated account.
 
 ## Start with the product skill
 
-- [Use Email Awesome for single or bulk verification and Warm-up guidance](skills/emailawesome/SKILL.md)
+- [Use Email Awesome for single or bulk verification and requested sender setup guidance](skills/emailawesome/SKILL.md)
 - [Install the skill](INSTALL.md) and read the [security boundaries](SECURITY.md).
 
 If you use the Skills CLI, install only the product skill with:
@@ -56,3 +56,7 @@ Run `python3 -m unittest discover -s tests -v` for package and helper checks. Re
 ## License
 
 Original instructions and code are available under the [MIT License](LICENSE). Product subscriptions, service access and third-party data remain subject to their respective terms. This license does not grant trademark rights or permission to collect third-party content.
+
+## Authenticated product check
+
+On 2026-09-28, browser testing completed one single-address verification and a four-row synthetic bulk upload: three addresses returned INVALID and one duplicate was excluded. The observed balance decreased by one credit for Single and three for Bulk. The export download was blocked by the browser permission policy, so exported columns and row-level reconciliation remain unverified. See [interface operations](skills/emailawesome/references/interface-operations.md) for current CSV handling and rejection recovery. This sample does not validate every status, API, integration or sender-setup workflow.
