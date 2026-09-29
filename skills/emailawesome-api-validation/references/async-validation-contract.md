@@ -16,6 +16,8 @@ Persist:
 - retry count and terminal time
 - business decision and policy version
 
+The reconciliation helper reports `mapping_complete` separately from `terminal_results_complete`. A mapped `PENDING` job is not a final email result. Treat `reconciled` as true only when every expected source ID has a terminal job and an explicit final `email_address_status` or `verification_result` in the four supported states.
+
 ## Form decisions
 
 Perform local syntax checks before consuming verification work. Choose fail-open, fail-closed, or queue-for-review behavior based on workflow risk and latency. A raw asynchronous endpoint should not hold a browser form open indefinitely.

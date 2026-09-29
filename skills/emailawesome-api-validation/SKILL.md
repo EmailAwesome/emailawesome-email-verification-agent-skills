@@ -15,6 +15,6 @@ Build a production-oriented verification boundary without exposing secrets or lo
 4. Use a public HTTPS callback with strict method, content type, size, schema, authenticity, replay, and destination controls. Do not allow end users to choose arbitrary callback URLs or headers.
 5. Apply terminal events idempotently and tolerate duplicate or out-of-order callbacks. Keep provider job state separate from verification result and business decision.
 6. Use bounded backoff for rate limits and transient failures. Do not blindly retry malformed requests, unresolved conflicts, or an uncertain submission that may consume another credit.
-7. Run `scripts/reconcile_jobs.py` to detect missing, unexpected, or duplicate source mappings.
+7. Run `scripts/reconcile_jobs.py` to detect missing, unexpected or duplicate source mappings and to distinguish mapping completion from terminal email results. A mapped pending job is not a completed verification.
 8. Test all four results, provider outage, timeout, malformed callback, replay, duplicate callback, out-of-order delivery, and unauthorized callback.
 9. Require explicit authorization before deployment, enabling blocking behavior, or connecting production data.

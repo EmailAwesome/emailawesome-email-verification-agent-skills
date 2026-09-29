@@ -24,10 +24,11 @@ class SkillContractTests(unittest.TestCase):
             self.assertIsNotNone(match, folder.name)
             self.assertEqual(match.group(1), folder.name)
 
-    def test_core_routes_every_specialized_skill(self):
+    def test_core_operates_product_without_specialized_skill_dependencies(self):
         core = (SKILLS / "emailawesome" / "SKILL.md").read_text(encoding="utf-8")
-        for name in EXPECTED - {"emailawesome"}:
-            self.assertIn(f"](../{name}/SKILL.md)", core)
+        self.assertIn("interface-operations.md", core)
+        self.assertTrue((SKILLS / "emailawesome" / "references" / "interface-operations.md").exists())
+        self.assertNotIn("](../", core)
 
     def test_workflow_readmes_match_skill_titles(self):
         for name in WORKFLOWS:

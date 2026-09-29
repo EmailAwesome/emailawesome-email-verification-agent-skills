@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import io
 import json
 import re
@@ -15,21 +16,37 @@ RESERVED = {"_ea_source_row_id", "_ea_preflight_issue"}
 
 
 def formula_safe(value: str) -> str:
-    return "'" + value if value.startswith(("=", "+", "-", "@")) else value
+    return "'" + value if value.lstrip().startswith(("=", "+", "-", "@")) else value
 
 
 def preflight(input_path: Path, output_path: Path, email_column: str | None = None) -> dict:
-    raw = input_path.read_text(encoding="utf-8-sig")
-    dialect = csv.Sniffer().sniff(raw[:8192], delimiters=",;\t|")
-    reader = csv.DictReader(io.StringIO(raw), dialect=dialect)
-    headers = list(reader.fieldnames or [])
+    if input_path.resolve() == output_path.resolve():
+        raise ValueError("working copy must not overwrite the source file")
+    source_bytes = input_path.read_bytes()
+    raw = source_bytes.decode("utf-8-sig")
+    if input_path.suffix.lower() == ".txt":
+        headers = ["email"]
+        rows = [{"email": line} for line in raw.splitlines()]
+        source_format = "txt"
+    else:
+        try:
+            dialect = csv.Sniffer().sniff(raw[:8192], delimiters=",;\t|")
+        except csv.Error as exc:
+            if any(delimiter in raw.partition("\n")[0] for delimiter in ",;\t|"):
+                raise ValueError("Could not identify a supported CSV delimiter") from exc
+            dialect = csv.excel  # a CSV with one named column needs no delimiter
+        reader = csv.DictReader(io.StringIO(raw), dialect=dialect)
+        headers = list(reader.fieldnames or [])
+        rows = list(reader)
+        source_format = "csv"
     if not headers or any(not header for header in headers) or len(headers) != len(set(headers)):
         raise ValueError("CSV headers must be present and unique")
+    if source_format == "csv" and len(headers) == 1 and EMAIL_RE.fullmatch(headers[0]):
+        raise ValueError("CSV appears headerless; add an email header or use TXT")
     if RESERVED.intersection(headers):
         raise ValueError("CSV uses reserved _ea_ audit columns")
-    rows = list(reader)
     if not rows:
-        raise ValueError("CSV contains no data rows")
+        raise ValueError("Source contains no data rows")
     if any(None in row for row in rows):
         raise ValueError("CSV contains rows wider than its header")
 
@@ -54,12 +71,12 @@ def preflight(input_path: Path, output_path: Path, email_column: str | None = No
     with output_path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=output_headers)
         writer.writeheader()
-        for record_number, row in enumerate(rows, start=2):
+        for record_number, row in enumerate(rows, start=1 if source_format == "txt" else 2):
             safe_row = {header: formula_safe(str(row.get(header, "") or "")) for header in headers}
             issue = ""
             if selected:
                 raw_email = str(row.get(selected, "") or "").strip()
-                if raw_email.startswith(("=", "+", "-", "@")):
+                if raw_email.lstrip().startswith(("=", "+", "-", "@")):
                     issue = "formula_like_email_requires_review"
                     safe_row[selected] = formula_safe(raw_email)
                 else:
@@ -70,6 +87,8 @@ def preflight(input_path: Path, output_path: Path, email_column: str | None = No
 
     return {
         "rows": len(rows),
+        "source_format": source_format,
+        "source_sha256": hashlib.sha256(source_bytes).hexdigest(),
         "headers": headers,
         "candidate_scores": scores,
         "selected_email_column": selected,

@@ -8,9 +8,13 @@ import json
 from collections import Counter
 from pathlib import Path
 
+FINAL_RESULTS = {"VALID", "INVALID", "CATCH_ALL", "UNKNOWN"}
+TERMINAL_JOBS = {"COMPLETE", "COMPLETED", "SUCCESS", "SUCCEEDED"}
+
 
 def reconcile(expected: list[str], jobs: list[dict]) -> dict:
     expected_set = set(expected)
+    duplicate_expected_ids = sorted(item for item, count in Counter(expected).items() if count > 1)
     by_source: dict[str, dict] = {}
     duplicates: set[str] = set()
     records_without_source = 0
@@ -25,7 +29,28 @@ def reconcile(expected: list[str], jobs: list[dict]) -> dict:
 
     missing = [source_id for source_id in expected if source_id not in by_source]
     unexpected = [source_id for source_id in by_source if source_id not in expected_set]
-    states = Counter(str(job.get("status", "MISSING") or "MISSING").upper() for job in by_source.values())
+    states = Counter(
+        str(job.get("job_status", job.get("status", "MISSING")) or "MISSING").upper()
+        for job in by_source.values()
+    )
+    mapping_complete = not (
+        missing or unexpected or duplicates or duplicate_expected_ids or records_without_source
+    )
+    nonterminal_or_unresolved = [
+        source_id
+        for source_id in expected
+        if source_id in by_source
+        and (
+            str(by_source[source_id].get("job_status", by_source[source_id].get("status", "")) or "").upper()
+            not in TERMINAL_JOBS
+            or str(
+                by_source[source_id].get("email_address_status", by_source[source_id].get("verification_result", ""))
+                or ""
+            ).upper()
+            not in FINAL_RESULTS
+        )
+    ]
+    terminal_results_complete = mapping_complete and not nonterminal_or_unresolved
     return {
         "expected": len(expected),
         "received_unique": len(by_source),
@@ -33,8 +58,12 @@ def reconcile(expected: list[str], jobs: list[dict]) -> dict:
         "missing": missing,
         "unexpected": unexpected,
         "duplicates": sorted(duplicates),
+        "duplicate_expected_ids": duplicate_expected_ids,
         "job_states": dict(states),
-        "reconciled": not missing and not unexpected and not duplicates and records_without_source == 0,
+        "nonterminal_or_unresolved": nonterminal_or_unresolved,
+        "mapping_complete": mapping_complete,
+        "terminal_results_complete": terminal_results_complete,
+        "reconciled": terminal_results_complete,
     }
 
 

@@ -1,6 +1,6 @@
 # Clean and Verify an Email List Before Your Next Campaign
 
-Use this model-neutral workflow to clean email list files without losing their source context. The email list cleaning process prepares a spreadsheet-safe working copy, performs CSV email verification preflight checks, maps approved rows to EmailAwesome bulk email verification, and exports auditable result segments. It does not send a campaign, delete contacts, or treat verification as consent.
+Use this model-neutral workflow to clean email list files without losing their source context. It prepares a working CSV, flags formula-like cells, maps approved rows to Email Awesome bulk verification, and exports auditable result segments. It does not send a campaign, delete contacts, or treat verification as consent.
 
 ## What it does
 
@@ -12,9 +12,9 @@ Teams can review exactly what was submitted, what came back, and what remains un
 
 ## Outputs
 
-- An unchanged source file and a spreadsheet-safe working copy
+- An unchanged source file and a working copy with formula-like cells flagged
 - Candidate-column scoring and stable source-row IDs
-- Separate result files for all four EmailAwesome states plus unresolved rows
+- Separate result files for all four Email Awesome states, explicit exclusions and unresolved rows
 - Counts, percentages, exclusions, duplicates, assumptions, and readiness notes
 
 Example result: `2,480 source rows = 2,301 verified + 129 intentionally excluded + 50 unresolved`. This is an illustrative local test format, not a live EmailAwesome result.
@@ -28,7 +28,7 @@ Use this skill before a campaign, CRM import, newsletter migration, or list-qual
 1. Inspect and preserve the original file.
 2. Run `scripts/preflight_csv.py` and confirm the email column.
 3. Submit only approved candidates through EmailAwesome.
-4. Reconcile each source row and run `scripts/segment_results.py`.
+4. Run `scripts/segment_results.py` with the working source file and explicit exclusions; check mapping and final-result completion separately.
 5. Review the report and approve any separate CRM or campaign action.
 
 ## Example request

@@ -1,18 +1,18 @@
-# Install EmailAwesome email verification skills
+# Install the Email Awesome product skill
 
-Install the complete `skills/` tree so every workflow can load the shared EmailAwesome product and result policy. Preserve folder names and relative paths.
+Install the complete `skills/emailawesome/` folder, including `SKILL.md` and `references/`. Add other folders only when you need their technical recipes. Preserve folder names and relative paths.
 
 ## Any LLM or agent harness
 
-1. Register each folder under `skills/` as a skill, or load its `SKILL.md` when the matching task is requested.
-2. Allow the model to read relative Markdown references and run the ordinary Python 3 helper scripts when needed.
-3. If the harness does not discover related skills automatically, load the selected workflow skill together with `skills/emailawesome/SKILL.md`.
-4. Keep credentials in the harness secret store or process environment; never add them to prompts, repositories, or generated files.
+1. Register `skills/emailawesome/` as a skill or load its `SKILL.md` when the user asks to use or troubleshoot Email Awesome.
+2. Allow the agent to read the skill's own references. Browser/computer use requires a compatible agent and an authenticated product session; the skill does not provide those capabilities itself.
+3. If you install a technical recipe too, make it and `emailawesome` available together. Run the ordinary Python 3 helpers only when their specific data-preparation task calls for them.
+4. Keep credentials in the product, authenticated connector, secret store or process environment; never add them to prompts, repositories or generated files.
 
-Start with this model-neutral request: `Prepare an auditable EmailAwesome list-cleaning plan for this CSV and preserve every source row.`
+Starter request: `Use Email Awesome to verify this small authorized list, keep every source row, wait for final results, and tell me which addresses need review.`
 
 ## Optional Codex or OpenAI adapter
 
 Each `agents/openai.yaml` file provides optional display and starter-prompt metadata. It is not required by the skill logic and can be ignored by Claude, GLM, DeepSeek, custom agents, and other compatible harnesses.
 
-The skills do not require an MCP server. See [COMPATIBILITY.md](COMPATIBILITY.md) for the portability contract.
+The product skill does not require an MCP server. See [COMPATIBILITY.md](COMPATIBILITY.md) for portability details.

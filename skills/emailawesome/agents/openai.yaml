@@ -1,6 +1,6 @@
 interface:
-  display_name: "EmailAwesome"
-  short_description: "Shared EmailAwesome verification guidance"
-  default_prompt: "Use $emailawesome to interpret an EmailAwesome verification result and recommend a safe next step."
+  display_name: "Email Awesome"
+  short_description: "Use Email Awesome to verify addresses and lists"
+  default_prompt: "Use $emailawesome to inspect my account, choose single or bulk verification, run the requested small check, and explain the final result and any pending work."
 policy:
   allow_implicit_invocation: true
