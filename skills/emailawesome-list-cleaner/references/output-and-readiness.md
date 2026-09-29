@@ -3,10 +3,12 @@
 ## Required outputs
 
 - An unchanged source file or its recorded hash and location.
-- A complete reconciled dataset with stable source IDs.
-- Separate `VALID`, `INVALID`, `CATCH_ALL`, `UNKNOWN`, excluded, and unresolved views.
+- A complete source-to-result mapping with stable IDs; a sum of output buckets is only a partition check.
+- Separate `VALID`, `INVALID`, `CATCH_ALL`, `UNKNOWN`, explicitly excluded, and unresolved views.
 - Duplicate relationships that point to the retained source row.
 - A machine-readable summary and a short human-readable quality report.
+
+Use `preflight_csv.py` for CSV or one-address-per-line TXT input. Run `segment_results.py` with `--source` pointing to the working CSV; pass explicit `--excluded-ids` when applicable. `mapping_complete` and `terminal_results_complete` must both be true before reporting a fully reconciled verification. Without a source copy, segmentation alone does not prove coverage.
 
 ## List-quality decision
 

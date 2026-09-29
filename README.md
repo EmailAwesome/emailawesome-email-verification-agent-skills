@@ -1,26 +1,22 @@
-# Email Verification Skills for List Cleaning, HubSpot, and APIs
+# Email Awesome Agent Skill for Email Verification
 
-This model-neutral EmailAwesome skill pack turns three practical email verification needs into auditable workflows: cleaning CSV lists before campaigns, verifying new HubSpot leads through Zapier, and adding an asynchronous validation boundary to forms or lead pipelines. It works with Claude, Codex, GLM, DeepSeek, and other harnesses that can load Markdown instructions and Python helpers. The pack preserves uncertainty, separates validation from consent, and requires approval before sending, CRM writes, suppression changes, or deployment.
+The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use Email Awesome without an MCP. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, guides Warm-up setup, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
 
-## Included email verification skills
+## Start with the product skill
 
-- [Clean and Verify an Email List Before Your Next Campaign](skills/emailawesome-list-cleaner/README.md)
-- [Automatically Verify New HubSpot Leads Before Outreach](skills/emailawesome-hubspot-verification/README.md)
-- [Add Email Validation to Forms and Lead Pipelines with an API](skills/emailawesome-api-validation/README.md)
-- `emailawesome`, the shared product, result-policy, credential, and routing foundation
+- [Use Email Awesome for single or bulk verification and Warm-up guidance](skills/emailawesome/SKILL.md)
+- [Install the skill](INSTALL.md) and read the [security boundaries](SECURITY.md).
 
-## Why this pack is useful
+## Existing technical recipes
 
-Most email validation examples stop at an API response. These skills preserve source rows, reconcile asynchronous jobs, distinguish `VALID`, `INVALID`, `CATCH_ALL`, and `UNKNOWN`, and make the next business action explicit. That makes the output easier to review, test, and hand from marketing operations to engineering without hiding unresolved records.
+- [Prepare and reconcile a CSV or TXT list](skills/emailawesome-list-cleaner/README.md)
+- [Design a HubSpot workflow through Zapier](skills/emailawesome-hubspot-verification/README.md)
+- [Design asynchronous API validation](skills/emailawesome-api-validation/README.md)
 
-## Install and use
+These folders remain available for existing installs. The product skill is the entry point for using Email Awesome; complete cold-sales, lead-capture and agency workflows will be separate use-case skills.
 
-Follow [INSTALL.md](INSTALL.md) for harness-neutral loading and [COMPATIBILITY.md](COMPATIBILITY.md) for the portability contract. Use [SECURITY.md](SECURITY.md) before connecting credentials or production data.
+## Verification boundary
 
-The included tests are local and do not consume EmailAwesome credits. Live verification requires an EmailAwesome account, an authorized data set, and explicit approval.
+The repository tests validate local structure and helper behavior. They do not log in, consume credits, connect a mailbox or prove that a live verification completed. A real result requires an authenticated account and an observed final status.
 
-## Discover the right workflow
-
-Use the list cleaner for CSV email verification and bulk list preparation. Use the HubSpot workflow for Zapier-based lead routing. Use the API workflow for signup forms, applications, callbacks, and developer-managed pipelines.
-
-Learn more at the [official EmailAwesome website](https://www.emailawesome.com/).
+Read the [official Email Awesome website](https://www.emailawesome.com/) and current developer documentation for product availability and integration contracts.
