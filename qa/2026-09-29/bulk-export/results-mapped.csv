@@ -1,0 +1,5 @@
+first_name,last_name,email,validation result,_ea_source_row_id
+QA001,Test,alpha@example.com,INVALID,2
+QA002,Test,beta@example.com,INVALID,3
+QA003,Duplicate,alpha@example.com,INVALID,4
+QA004,Test,gamma@example.com,INVALID,5

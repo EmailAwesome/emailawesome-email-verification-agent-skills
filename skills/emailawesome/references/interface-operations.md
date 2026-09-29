@@ -24,6 +24,16 @@ In the authenticated check on 2026-09-28, a CSV using `example.invalid` was reje
 
 The observed result menu was **more > Download all emails**. If download permission is denied, stop that path and report `export and row reconciliation unverified`; aggregate counts do not prove exported identities or columns. Keep signed download URLs out of reports and public repositories.
 
+### Observed bulk export on 2026-09-29
+
+A completed four-row synthetic job, verified on 2026-09-28, exported `first_name,last_name,email,validation result`. Its UI reported three unique INVALID addresses; the downloaded file retained all four input rows, including the duplicate, each marked INVALID. Export rows, unique addresses and charged validations are different counts. This sample does not prove that every custom column is preserved.
+
+The original tuple `(first_name, last_name, email)` was unique in both source and export for this sample. It provided an exact, non-positional mapping to locally assigned source IDs. Do not use names alone, row order or an ambiguous tuple as a join. If multiple source records cannot be distinguished, retain them in an explicit duplicate map and report any unresolved row identity.
+
+When using `emailawesome-list-cleaner/scripts/segment_results.py`, inspect the live headers and set `--status-column "validation result"` for this observed schema. Add locally mapped `_ea_source_row_id` only after proving the mapping; do not claim Email Awesome returned that ID. Preserve the original file alongside the mapped copy. A duplicate's returned technical status does not make it a second contact or an extra validation charge. Keep the duplicate's business exclusion separately.
+
+This test reconciled 4/4 source rows, 3 unique addresses and 1 duplicate, with zero additional verification credits on the download date. VALID, CATCH_ALL and UNKNOWN were not observed in this sample.
+
 ## Delivery Optimizer and Warm-up guidance
 
 Use this mode only for a requested sender-domain or inbox setup. The navigation observed on 2026-09-28 called it **Delivery Optimizer Beta**; do not assume a menu named Warm-up or infer the feature's capabilities from its label. Check which inbox/domain the user means, the current UI guidance, connected state and any visible schedule or volume. Explain what is pending before invoking external account permissions. A connected mailbox or active indicator proves only the displayed setup state, not future inbox placement. Do not change live campaign sending without authorization.

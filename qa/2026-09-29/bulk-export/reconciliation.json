@@ -1,0 +1,22 @@
+{
+  "source_sha256": "d661a1dd14cb0abc1f56cca3f2aed3b57ef2807ca398e42141bda6e9b4463a33",
+  "export_sha256": "21142e1c6ca64d53195751e3eadca3eaecad802828b27d2989610184b319e7d4",
+  "source_rows": 4,
+  "export_rows": 4,
+  "unique_addresses": 3,
+  "ui_unique_processed": 3,
+  "returned_statuses": {
+    "INVALID": 4
+  },
+  "unique_statuses": {
+    "INVALID": 3
+  },
+  "duplicate_source_ids": [
+    "4"
+  ],
+  "mapping_method": "Exact first_name + last_name + email tuple, unique in source and export. Not positional. Source IDs generated locally; not claimed returned by product.",
+  "downloaded_at": "2026-09-29",
+  "verification_date": "2026-09-28",
+  "credits_this_run": 0,
+  "mapping_complete": true
+}

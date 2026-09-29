@@ -60,7 +60,7 @@ Original instructions and code are available under the [MIT License](LICENSE). P
 
 ## Authenticated product check
 
-On 2026-09-28, browser testing completed one single-address verification and a four-row synthetic bulk upload: three addresses returned INVALID and one duplicate was excluded. The observed balance decreased by one credit for Single and three for Bulk. The export download was blocked by the browser permission policy, so exported columns and row-level reconciliation remain unverified. See [interface operations](skills/emailawesome/references/interface-operations.md) for current CSV handling and rejection recovery. This sample does not validate every status, API, integration or sender-setup workflow.
+On 2026-09-28, browser testing completed one single-address verification and a four-row synthetic bulk upload: three addresses returned INVALID and one duplicate was excluded. The observed balance decreased by one credit for Single and three for Bulk. The initially blocked export was downloaded on 2026-09-29 and reconciled to all four source rows. Its `validation result` column returned INVALID for all four rows, including the duplicate; the UI counted three unique validations. Downloading consumed no additional verification credits. See [interface operations](skills/emailawesome/references/interface-operations.md) for current CSV handling and rejection recovery. This sample does not validate every status, API, integration or sender-setup workflow.
 
 ## Event preparation
 

@@ -1,0 +1,5 @@
+﻿_ea_source_row_id,_ea_preflight_issue,first_name,last_name,email
+2,,QA001,Test,alpha@example.com
+3,,QA002,Test,beta@example.com
+4,,QA003,Duplicate,alpha@example.com
+5,,QA004,Test,gamma@example.com
