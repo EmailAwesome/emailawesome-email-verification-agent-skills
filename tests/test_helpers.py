@@ -185,6 +185,30 @@ class ExportSafetyTests(unittest.TestCase):
             self.assertEqual(list(csv.DictReader(handle))[0]["note"], "'=1+1")
         self.assertFalse(summary["outreach_permission_checked"])
 
+    def test_source_ledger_preserves_missing_rows_and_business_fields(self):
+        summary, output = self.run_export(
+            "_ea_source_row_id,email_address_status\n1,VALID\n",
+            "_ea_source_row_id,email,suppression,client\n1,a@example.com,opted_out,A\n2,b@example.com,,B\n")
+        with (output / "source_ledger.csv").open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["suppression"], "opted_out")
+        self.assertEqual(rows[1]["client"], "B")
+        self.assertEqual(rows[1]["_ea_resolution_reason"], "missing_result")
+        self.assertEqual(summary["source_buckets"], {"valid": 1, "unresolved": 1})
+        self.assertFalse(summary["outreach_permission_checked"])
+
+    def test_duplicate_provider_rows_produce_one_source_ledger_row(self):
+        summary, output = self.run_export(
+            "_ea_source_row_id,email_address_status\n1,VALID\n1,VALID\n",
+            "_ea_source_row_id,email\n1,a@example.com\n")
+        with (output / "source_ledger.csv").open(encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["_ea_result_bucket"], "unresolved")
+        self.assertEqual(rows[0]["_ea_result_count"], "2")
+        self.assertEqual(summary["source_buckets"], {"unresolved": 1})
+
     def test_ragged_or_duplicate_headers_rejected(self):
         for raw in ("_ea_source_row_id,email_address_status\n1,VALID,extra\n", "_ea_source_row_id,email_address_status,email_address_status\n1,VALID,VALID\n"):
             with self.assertRaises(ValueError):

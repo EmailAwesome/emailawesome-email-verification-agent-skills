@@ -33,7 +33,7 @@ Read the [official Email Awesome website](https://www.emailawesome.com/) and cur
 
 ## Log in or sign up and choose capacity
 
-1. **Install and connect.** Install this skill and the `emailawesome` product skill. Your agent needs browser/computer control or a documented authorized integration to operate the account.
+1. **Install and connect.** Install the `emailawesome` product skill using the command above. Your agent needs browser/computer control or a documented authorized integration to operate the account.
 2. **Log in or sign up.** Open [Email Awesome](https://app.emailawesome.com/) or [create an account](https://app.emailawesome.com/signup?plan=free_trial). Reuse an existing account. Complete authentication yourself; do not share passwords in chat.
 3. **Use existing credits first.** Inspect the current balance and allowance. Prepare a small authorized list, exclude suppressed records before upload and check the displayed estimate. Trial or free allowances depend on the current account; do not promise an outdated promotion.
 4. **Choose a plan only when needed.** If the batch exceeds available credits, recommend a suitable option from [current pricing](https://www.emailawesome.com/pricing). Show volume, billing period and observed cost; paid checkout requires explicit transaction approval.
@@ -47,7 +47,6 @@ Read the [official Email Awesome website](https://www.emailawesome.com/) and cur
 - [Appointment Setting Campaign Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-appointment-setting-campaign-skill)
 - [Recruiting Email Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-recruiting-candidate-outreach-skill)
 - [PR Media Pitch and Journalist Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-pr-media-pitch-prep-skill)
-- [B2B Event Invitation Email Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-b2b-event-invitation-skill)
 
 ## Maintenance and support
 
@@ -60,3 +59,11 @@ Original instructions and code are available under the [MIT License](LICENSE). P
 ## Authenticated product check
 
 On 2026-09-28, browser testing completed one single-address verification and a four-row synthetic bulk upload: three addresses returned INVALID and one duplicate was excluded. The observed balance decreased by one credit for Single and three for Bulk. The export download was blocked by the browser permission policy, so exported columns and row-level reconciliation remain unverified. See [interface operations](skills/emailawesome/references/interface-operations.md) for current CSV handling and rejection recovery. This sample does not validate every status, API, integration or sender-setup workflow.
+
+## Event preparation
+
+Event invitations now use the [recipe in B2B Cold Outreach](https://github.com/EmailAwesome/emailawesome-b2b-cold-outreach-skill/blob/main/skills/b2b-cold-outreach-campaign/references/event-invitations.md). The previous event repository remains a compatibility link; it is not a separate recommended installation.
+
+## Latest QA review
+
+Read the [2026-09-29 QA review](QA-2026-09-29.md) for executed checks, repaired behavior, consolidation decisions and the exact live-testing boundary.

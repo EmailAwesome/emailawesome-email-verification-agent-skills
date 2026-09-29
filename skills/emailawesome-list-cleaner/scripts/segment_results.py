@@ -53,6 +53,7 @@ def segment(
         raise ValueError("excluded IDs require a source working copy")
     output_paths = {output_dir / f"{name}.csv" for name in [*STATUSES.values(), "unresolved", "excluded"]}
     output_paths.add(output_dir / "summary.json")
+    output_paths.add(output_dir / "source_ledger.csv")
     protected = {input_path.resolve()}
     if source_path:
         protected.add(source_path.resolve())
@@ -114,6 +115,36 @@ def segment(
         writer.writeheader()
         writer.writerows(spreadsheet_safe(row) for row in excluded_rows)
 
+    # Provider rows may be duplicated or missing. Preserve one row per source
+    # separately, so a missing response never disappears from the deliverable.
+    ledger = []
+    by_source = {}
+    for row in rows:
+        by_source.setdefault(row.get(SOURCE_ID, ""), []).append(row)
+    ledger_fields = ["_ea_result_bucket", "_ea_resolution_reason", "_ea_result_count"]
+    if source_path and any(field in source_headers for field in ledger_fields):
+        raise ValueError("source contains reserved ledger fields")
+    for source_row in source_rows:
+        sid = source_row[SOURCE_ID]
+        returned = by_source.get(sid, [])
+        if sid in ambiguous_ids:
+            bucket, reason = "unresolved", "ambiguous_result_identity_or_exclusion_overlap"
+        elif sid in excluded:
+            bucket, reason = "excluded", "explicit_exclusion"
+        elif not returned:
+            bucket, reason = "unresolved", "missing_result"
+        else:
+            status = str(returned[0].get(status_column, "") or "").strip().upper()
+            bucket = STATUSES.get(status, "unresolved")
+            reason = "terminal_result" if bucket != "unresolved" else "nonterminal_or_unknown_status"
+        ledger.append({**source_row, "_ea_result_bucket": bucket,
+                       "_ea_resolution_reason": reason, "_ea_result_count": len(returned)})
+    if source_path:
+        with (output_dir / "source_ledger.csv").open("w", encoding="utf-8-sig", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=source_headers + ledger_fields)
+            writer.writeheader()
+            writer.writerows(spreadsheet_safe(row) for row in ledger)
+
     counts = {name: len(bucket) for name, bucket in buckets.items()}
     counts["excluded"] = len(excluded_rows)
     mapping_complete = bool(source_path) and not (missing or unexpected or duplicates or overlap or email_mismatches or "" in result_ids)
@@ -121,6 +152,10 @@ def segment(
     summary = {
         "input_rows": len(rows),
         "source_rows": len(source_rows) if source_path else None,
+        "source_ledger_rows": len(ledger),
+        "source_buckets": dict(Counter(row["_ea_result_bucket"] for row in ledger)),
+        "provider_bucket_counts_are_source_counts": False,
+
         "segments": counts,
         "duplicate_result_ids": duplicates,
         "missing_source_ids": missing,
