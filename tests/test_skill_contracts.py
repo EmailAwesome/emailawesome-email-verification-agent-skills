@@ -47,7 +47,7 @@ class SkillContractTests(unittest.TestCase):
             self.assertNotRegex(content.lower(), r"\b(?:codex|openai|claude|glm|deepseek)\b")
         for name in WORKFLOWS:
             content = (SKILLS / name / "SKILL.md").read_text(encoding="utf-8")
-            self.assertIn("](../emailawesome/SKILL.md)", content, name)
+            self.assertIn("](https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills/tree/main/skills/emailawesome)", content, name)
 
     def test_portability_contract_marks_adapter_optional(self):
         content = (ROOT / "COMPATIBILITY.md").read_text(encoding="utf-8").lower()

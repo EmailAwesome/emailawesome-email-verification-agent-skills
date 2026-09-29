@@ -13,6 +13,8 @@ TERMINAL_JOBS = {"COMPLETE", "COMPLETED", "SUCCESS", "SUCCEEDED"}
 
 
 def reconcile(expected: list[str], jobs: list[dict]) -> dict:
+    if not expected or any(not isinstance(item, str) or not item.strip() for item in expected):
+        raise ValueError("expected source IDs must be nonempty strings and the batch must not be empty")
     expected_set = set(expected)
     duplicate_expected_ids = sorted(item for item, count in Counter(expected).items() if count > 1)
     by_source: dict[str, dict] = {}

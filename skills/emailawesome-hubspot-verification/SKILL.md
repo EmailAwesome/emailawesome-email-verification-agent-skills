@@ -1,6 +1,7 @@
 ---
 name: emailawesome-hubspot-verification
 description: Design and verify Zapier workflows that check new HubSpot form submissions or leads with EmailAwesome, write auditable status fields, prevent duplicate processing, and route every result. Use for HubSpot data-quality automation; not for claiming a native connector or enabling a live Zap without approval.
+license: MIT
 ---
 
 # Automatically Verify New HubSpot Leads Before Outreach
@@ -10,7 +11,7 @@ Create a reversible HubSpot and EmailAwesome workflow that makes uncertainty vis
 ## Workflow
 
 1. Identify the HubSpot trigger, form or object, source email field, stable record ID, current consent/suppression fields, and the first downstream action that depends on verification.
-2. Read the [shared EmailAwesome guidance](../emailawesome/SKILL.md) and [references/hubspot-zapier-workflow.md](references/hubspot-zapier-workflow.md).
+2. Read the [shared EmailAwesome guidance](https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills/tree/main/skills/emailawesome) and [references/hubspot-zapier-workflow.md](references/hubspot-zapier-workflow.md).
 3. Choose Realtime Email Validation when the next Zap step needs an immediate branch. Use saved single validation when an asynchronous record is acceptable; use bulk verification for existing exports.
 4. Map all four results explicitly. Never create a `RISKY` pseudo-status or merge `CATCH_ALL` and `UNKNOWN` into `VALID`.
 5. Add duplicate-trigger protection, verification timestamp, provider result, provider/job ID where available, workflow version, retry owner, and an exception queue.
@@ -23,3 +24,9 @@ Create a reversible HubSpot and EmailAwesome workflow that makes uncertainty vis
 - This is a Zapier workflow, not a proprietary native HubSpot connector.
 - A HubSpot form submission may already exist before validation. Say `verify before outreach or downstream use`, not `prevent HubSpot from creating the contact`.
 - Never delete contacts or overwrite consent automatically.
+
+## Product account dependency
+
+For browser operation, install the `emailawesome` product skill from https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills and follow its account and capacity journey. If it is not installed, read the linked product instructions and current documentation; never assume sibling skill folders exist.
+
+For jurisdiction-specific outreach preparation, consult the current [FTC commercial email guidance](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) and [ICO B2B marketing guidance](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/) when applicable. Verify other recipient jurisdictions separately; these references are not universal legal clearance.

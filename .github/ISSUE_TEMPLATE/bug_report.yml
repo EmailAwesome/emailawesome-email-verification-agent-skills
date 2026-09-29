@@ -1,0 +1,15 @@
+name: Reproducible skill issue
+description: Report a workflow, installation or documentation problem using synthetic data.
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Agent version and installed commit
+      description: Include installation command, expected behavior and actual behavior. No credentials or real contact lists.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Synthetic reproduction and redacted evidence
+      description: State whether this was a package check or an authenticated product run.

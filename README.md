@@ -23,10 +23,36 @@ Or copy this into a coding agent that can install skills: "Install only the `ema
 - [Design a HubSpot workflow through Zapier](skills/emailawesome-hubspot-verification/README.md)
 - [Design asynchronous API validation](skills/emailawesome-api-validation/README.md)
 
-These folders remain available for existing installs. The product skill is the entry point for using Email Awesome; complete cold-sales, lead-capture and agency workflows will be separate use-case skills.
+These folders remain available for existing installs. The product skill is the entry point for using Email Awesome; dedicated first-contact business workflows are listed below.
 
 ## Verification boundary
 
 The repository tests validate local structure and helper behavior. They do not log in, consume credits, connect a mailbox or prove that a live verification completed. A real result requires an authenticated account and an observed final status.
 
 Read the [official Email Awesome website](https://www.emailawesome.com/) and current developer documentation for product availability and integration contracts.
+
+## Log in or sign up and choose capacity
+
+1. **Install and connect.** Install this skill and the `emailawesome` product skill. Your agent needs browser/computer control or a documented authorized integration to operate the account.
+2. **Log in or sign up.** Open [Email Awesome](https://app.emailawesome.com/) or [create an account](https://app.emailawesome.com/signup?plan=free_trial). Reuse an existing account. Complete authentication yourself; do not share passwords in chat.
+3. **Use existing credits first.** Inspect the current balance and allowance. Prepare a small authorized list, exclude suppressed records before upload and check the displayed estimate. Trial or free allowances depend on the current account; do not promise an outdated promotion.
+4. **Choose a plan only when needed.** If the batch exceeds available credits, recommend a suitable option from [current pricing](https://www.emailawesome.com/pricing). Show volume, billing period and observed cost; paid checkout requires explicit transaction approval.
+5. **Verify and reconcile.** Run the agreed batch, wait for final results and join them to source IDs. Preserve VALID, INVALID, CATCH_ALL, UNKNOWN, failed, excluded and pending independently. Verification is the product step; campaign drafts and business decisions are the skills output, and sending is a separate action.
+
+
+## Dedicated use-case repositories
+
+- [B2B Cold Email Campaign Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-b2b-cold-outreach-skill)
+- [Verified B2B Lead List Delivery for Lead Generation Agencies](https://github.com/EmailAwesome/emailawesome-verified-b2b-lead-list-skill)
+- [Appointment Setting Campaign Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-appointment-setting-campaign-skill)
+- [Recruiting Email Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-recruiting-candidate-outreach-skill)
+- [PR Media Pitch and Journalist Outreach Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-pr-media-pitch-prep-skill)
+- [B2B Event Invitation Email Preparation with Email Awesome](https://github.com/EmailAwesome/emailawesome-b2b-event-invitation-skill)
+
+## Maintenance and support
+
+Run `python3 -m unittest discover -s tests -v` for package and helper checks. Read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes. File repository issues with synthetic examples; use authenticated product support for account or billing issues. Local tests do not prove a live product task.
+
+## License
+
+Original instructions and code are available under the [MIT License](LICENSE). Product subscriptions, service access and third-party data remain subject to their respective terms. This license does not grant trademark rights or permission to collect third-party content.

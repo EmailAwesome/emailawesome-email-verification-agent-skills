@@ -40,7 +40,7 @@ Use this skill for developer-managed forms, applications, or lead systems that n
 
 Load this `SKILL.md` with the [shared EmailAwesome guidance](../emailawesome/SKILL.md). Run `scripts/reconcile_jobs.py` with Python 3 when mapping evidence must be checked. The skill is portable across compatible LLM and agent harnesses.
 
-Recheck the [official EmailAwesome API use case](https://www.emailawesome.com/use-cases/email-validation-api) and current developer documentation before creating deployable transport code.
+Recheck the [official EmailAwesome API use case](https://www.emailawesome.com/email-validation-api) and current developer documentation before creating deployable transport code.
 
 ## Limitations and FAQ
 

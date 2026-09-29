@@ -23,7 +23,16 @@ SOURCE_ID = "_ea_source_row_id"
 def read_csv(path: Path) -> tuple[list[dict], list[str]]:
     with path.open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.DictReader(handle)
-        return list(reader), list(reader.fieldnames or [])
+        rows, headers = list(reader), list(reader.fieldnames or [])
+        if not headers or any(not name for name in headers) or len(headers) != len(set(headers)):
+            raise ValueError("CSV headers must be present and unique")
+        if any(None in row or any(value is None for value in row.values()) for row in rows):
+            raise ValueError("CSV row width must match its header")
+        return rows, headers
+
+
+def spreadsheet_safe(row: dict) -> dict:
+    return {key: "'" + str(value) if str(value).lstrip().startswith(("=", "+", "-", "@")) else value for key, value in row.items()}
 
 
 def segment(
@@ -32,6 +41,8 @@ def segment(
     status_column: str,
     source_path: Path | None = None,
     excluded_ids: list[str] | None = None,
+    source_email_column: str | None = None,
+    result_email_column: str | None = None,
 ) -> dict:
     rows, headers = read_csv(input_path)
     if status_column not in headers:
@@ -69,29 +80,43 @@ def segment(
     missing = sorted(set(source_ids) - set(result_ids) - excluded)
     unexpected = sorted(set(result_ids) - set(source_ids)) if source_path else []
     overlap = sorted(set(result_ids) & excluded)
+    if bool(source_email_column) != bool(result_email_column):
+        raise ValueError("both source and result email column names are required")
+    email_mismatches = []
+    if source_email_column:
+        if not source_path or source_email_column not in source_headers or result_email_column not in headers:
+            raise ValueError("email comparison requires source and valid email columns")
+        def normalized(value):
+            # Preserve local-part case; case-sensitive providers exist.
+            local, sep, domain = str(value or "").strip().rpartition("@")
+            return local + sep + domain.lower() if sep else ""
+        expected_emails = {row[SOURCE_ID]: normalized(row[source_email_column]) for row in source_rows}
+        email_mismatches = sorted({row.get(SOURCE_ID, "") for row in rows if row.get(SOURCE_ID) in expected_emails and (not normalized(row[result_email_column]) or normalized(row[result_email_column]) != expected_emails[row[SOURCE_ID]])})
+    ambiguous_ids = set(duplicates + unexpected + overlap + email_mismatches)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     buckets = {name: [] for name in [*STATUSES.values(), "unresolved"]}
     for row in rows:
         status = str(row.get(status_column, "") or "").strip().upper()
-        buckets[STATUSES.get(status, "unresolved")].append(row)
+        ambiguous = source_path and (not row.get(SOURCE_ID) or row.get(SOURCE_ID) in ambiguous_ids)
+        buckets["unresolved" if ambiguous else STATUSES.get(status, "unresolved")].append(row)
 
     for name, bucket in buckets.items():
         path = output_dir / f"{name}.csv"
         with path.open("w", encoding="utf-8-sig", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=headers)
             writer.writeheader()
-            writer.writerows(bucket)
+            writer.writerows(spreadsheet_safe(row) for row in bucket)
 
     excluded_rows = [row for row in source_rows if str(row.get(SOURCE_ID, "") or "") in excluded]
     with (output_dir / "excluded.csv").open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=source_headers)
         writer.writeheader()
-        writer.writerows(excluded_rows)
+        writer.writerows(spreadsheet_safe(row) for row in excluded_rows)
 
     counts = {name: len(bucket) for name, bucket in buckets.items()}
     counts["excluded"] = len(excluded_rows)
-    mapping_complete = bool(source_path) and not (missing or unexpected or duplicates or overlap or "" in result_ids)
+    mapping_complete = bool(source_path) and not (missing or unexpected or duplicates or overlap or email_mismatches or "" in result_ids)
     terminal_results_complete = mapping_complete and not buckets["unresolved"]
     summary = {
         "input_rows": len(rows),
@@ -101,6 +126,9 @@ def segment(
         "missing_source_ids": missing,
         "unexpected_result_ids": unexpected,
         "result_and_excluded_overlap": overlap,
+        "email_identity_checked": bool(source_email_column),
+        "email_mismatch_source_ids": email_mismatches,
+        "outreach_permission_checked": False,
         "mapping_complete": mapping_complete,
         "terminal_results_complete": terminal_results_complete,
         "reconciled": terminal_results_complete,
@@ -116,9 +144,11 @@ def main() -> None:
     parser.add_argument("--status-column", default="email_address_status")
     parser.add_argument("--source", type=Path, help="preflight working CSV with stable source IDs")
     parser.add_argument("--excluded-ids", type=Path, help="JSON array of explicitly excluded source IDs")
+    parser.add_argument("--source-email-column", help="source email column for identity cross-check")
+    parser.add_argument("--result-email-column", help="returned email column for identity cross-check")
     args = parser.parse_args()
     excluded = json.loads(args.excluded_ids.read_text(encoding="utf-8")) if args.excluded_ids else None
-    print(json.dumps(segment(args.input, args.output_dir, args.status_column, args.source, excluded), indent=2))
+    print(json.dumps(segment(args.input, args.output_dir, args.status_column, args.source, excluded, args.source_email_column, args.result_email_column), indent=2))
 
 
 if __name__ == "__main__":

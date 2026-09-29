@@ -114,6 +114,11 @@ class CsvTests(unittest.TestCase):
 
 
 class AsyncTests(unittest.TestCase):
+    def test_empty_batch_and_blank_expected_id_are_rejected(self):
+        for expected in ([], [""], [" "]):
+            with self.assertRaises(ValueError):
+                reconcile.reconcile(expected, [])
+
     def test_reconciliation_reports_missing_duplicates_and_unmapped(self):
         result = reconcile.reconcile(
             ["1", "2"],
@@ -143,6 +148,47 @@ class AsyncTests(unittest.TestCase):
         )
         self.assertTrue(final["terminal_results_complete"])
         self.assertTrue(final["reconciled"])
+
+
+class ExportSafetyTests(unittest.TestCase):
+    def run_export(self, results_text, working_text, **kwargs):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        root = Path(temp.name)
+        results, working, output = root / "results.csv", root / "working.csv", root / "output"
+        results.write_text(results_text)
+        working.write_text(working_text)
+        return segmenter.segment(results, output, "email_address_status", working, **kwargs), output
+
+    def test_duplicate_results_are_quarantined_not_exported_valid(self):
+        summary, output = self.run_export(
+            "_ea_source_row_id,email_address_status\n1,VALID\n1,VALID\n",
+            "_ea_source_row_id,email\n1,a@example.com\n")
+        self.assertEqual(summary["segments"]["valid"], 0)
+        self.assertEqual(summary["segments"]["unresolved"], 2)
+        self.assertFalse(summary["reconciled"])
+
+    def test_email_identity_mismatch_is_quarantined(self):
+        summary, _ = self.run_export(
+            "_ea_source_row_id,email_address_status,email\n1,VALID,other@example.com\n",
+            "_ea_source_row_id,email\n1,a@example.com\n",
+            source_email_column="email", result_email_column="email")
+        self.assertEqual(summary["email_mismatch_source_ids"], ["1"])
+        self.assertEqual(summary["segments"]["valid"], 0)
+
+    def test_unknown_remains_unknown_and_formula_is_escaped(self):
+        summary, output = self.run_export(
+            "_ea_source_row_id,email_address_status,note\n1,UNKNOWN,=1+1\n",
+            "_ea_source_row_id,email\n1,a@example.com\n")
+        self.assertEqual(summary["segments"]["unknown"], 1)
+        with (output / "unknown.csv").open(encoding="utf-8-sig", newline="") as handle:
+            self.assertEqual(list(csv.DictReader(handle))[0]["note"], "'=1+1")
+        self.assertFalse(summary["outreach_permission_checked"])
+
+    def test_ragged_or_duplicate_headers_rejected(self):
+        for raw in ("_ea_source_row_id,email_address_status\n1,VALID,extra\n", "_ea_source_row_id,email_address_status,email_address_status\n1,VALID,VALID\n"):
+            with self.assertRaises(ValueError):
+                self.run_export(raw, "_ea_source_row_id,email\n1,a@example.com\n")
 
 
 if __name__ == "__main__":
