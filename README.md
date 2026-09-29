@@ -1,11 +1,21 @@
-# Email Awesome Agent Skill for Email Verification
+# Email Awesome Email Verification Skill for Addresses and Lists
 
 The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use Email Awesome without an MCP. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, guides Warm-up setup, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
+
+Use it to check addresses or lists with [Email Awesome](https://www.emailawesome.com/), inspect final statuses, and decide which records need review. The skill supplies instructions; the agent still needs compatible browser tools and access to your authenticated account.
 
 ## Start with the product skill
 
 - [Use Email Awesome for single or bulk verification and Warm-up guidance](skills/emailawesome/SKILL.md)
 - [Install the skill](INSTALL.md) and read the [security boundaries](SECURITY.md).
+
+If you use the Skills CLI, install only the product skill with:
+
+```bash
+npx skills add EmailAwesome/emailawesome-email-verification-agent-skills --skill emailawesome
+```
+
+Or copy this into a coding agent that can install skills: "Install only the `emailawesome` skill from https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills, then help me verify my requested addresses and interpret the final results." Confirm the installation before asking it to operate your account; a chat without skill installation support can still read the linked instructions.
 
 ## Existing technical recipes
 

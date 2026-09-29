@@ -2,6 +2,8 @@
 
 Install the complete `skills/emailawesome/` folder, including `SKILL.md` and `references/`. Add other folders only when you need their technical recipes. Preserve folder names and relative paths.
 
+For an agent supported by the [Skills CLI](https://github.com/vercel-labs/skills), run `npx skills add EmailAwesome/emailawesome-email-verification-agent-skills --skill emailawesome`. Use `--list` instead of `--skill emailawesome` to preview all skills in this repository without installing them. The command installs instructions; it does not authenticate or verify an address.
+
 ## Any LLM or agent harness
 
 1. Register `skills/emailawesome/` as a skill or load its `SKILL.md` when the user asks to use or troubleshoot Email Awesome.
