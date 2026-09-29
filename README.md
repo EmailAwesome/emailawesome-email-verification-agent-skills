@@ -6,6 +6,12 @@ The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent us
 
 Use it to check addresses or lists with [Email Awesome](https://www.emailawesome.com/), inspect final statuses, and decide which records need review. The skill supplies instructions; the agent still needs compatible browser tools and access to your authenticated account.
 
+
+## Release status
+
+Public preview: the core instructions and helpers are tested; full live coverage is still incomplete. Read the [dated QA report](QA-2026-09-29.md) before relying on a particular execution path.
+
+
 ## Start with the product skill
 
 - [Use Email Awesome for single or bulk verification and requested sender setup guidance](skills/emailawesome/SKILL.md)
