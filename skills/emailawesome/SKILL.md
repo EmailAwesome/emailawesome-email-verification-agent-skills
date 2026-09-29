@@ -2,6 +2,9 @@
 name: emailawesome
 description: Use and explain Email Awesome through its current web interface with browser or computer use. Choose one-off or bulk verification, inspect requested sender setup, inspect final results and visible credits, and help connect authorized API or Zapier workflows. Use for product setup, operation and troubleshooting without assuming an MCP.
 license: MIT
+metadata:
+  author: EmailAwesome
+  repository: https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills
 ---
 
 # Email Awesome Email Verification and Product Operation

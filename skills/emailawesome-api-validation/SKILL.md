@@ -2,6 +2,9 @@
 name: emailawesome-api-validation
 description: Add EmailAwesome validation to forms, applications, CRMs, and lead pipelines using server-side secrets, asynchronous callbacks, idempotent reconciliation, bounded retries, and explicit result policy. Use for developer implementation; not for guessed endpoints or synchronous-only promises.
 license: MIT
+metadata:
+  author: EmailAwesome
+  repository: https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills
 ---
 
 # Add Email Validation to Forms and Lead Pipelines with an API

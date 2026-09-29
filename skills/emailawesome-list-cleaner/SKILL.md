@@ -2,6 +2,9 @@
 name: emailawesome-list-cleaner
 description: Clean and verify CSV or TXT email lists with EmailAwesome while preserving source rows, reconciling every result, segmenting uncertainty, and reporting list quality. Use for bulk files before campaigns or imports; not for sending or silent deletion.
 license: MIT
+metadata:
+  author: EmailAwesome
+  repository: https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills
 ---
 
 # Clean and Verify an Email List Before Your Next Campaign

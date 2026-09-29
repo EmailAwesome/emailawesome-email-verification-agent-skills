@@ -2,6 +2,9 @@
 name: emailawesome-hubspot-verification
 description: Design and verify Zapier workflows that check new HubSpot form submissions or leads with EmailAwesome, write auditable status fields, prevent duplicate processing, and route every result. Use for HubSpot data-quality automation; not for claiming a native connector or enabling a live Zap without approval.
 license: MIT
+metadata:
+  author: EmailAwesome
+  repository: https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills
 ---
 
 # Automatically Verify New HubSpot Leads Before Outreach
