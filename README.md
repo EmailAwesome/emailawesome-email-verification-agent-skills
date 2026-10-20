@@ -43,8 +43,8 @@ Read the [official Email Awesome website](https://www.emailawesome.com/) and cur
 
 1. **Install and connect.** Install the `emailawesome` product skill using the command above. Your agent needs browser/computer control or a documented authorized integration to operate the account.
 2. **Log in or sign up.** Open [Email Awesome](https://app.emailawesome.com/) or [create an account](https://app.emailawesome.com/signup?plan=free_trial). Reuse an existing account. Complete authentication yourself; do not share passwords in chat.
-3. **Use existing credits first.** Inspect the current balance and allowance. Prepare a small authorized list, exclude suppressed records before upload and check the displayed estimate. Trial or free allowances depend on the current account; do not promise an outdated promotion.
-4. **Choose a plan only when needed.** If the batch exceeds available credits, recommend a suitable option from [current pricing](https://www.emailawesome.com/pricing). Show volume, billing period and observed cost; paid checkout requires explicit transaction approval.
+3. **Use existing credits first.** Inspect the current monthly allowance, purchased balance and displayed batch estimate. Prepare a small authorized list and exclude suppressed records before upload. Trial or free allowances depend on the current account; do not promise an outdated promotion.
+4. **Choose a one-time top-up or monthly plan only for a real gap.** For occasional extra volume, the skill guides you to **My Subscription → Buy more verifications**, or the Bulk top-up offer when shown. For recurring needs, it compares the current monthly plans. It checks the selected quantity and live terms and asks before payment; verifying a list does not authorize a purchase. See the [capacity and top-up journey](skills/emailawesome/references/account-journey.md).
 5. **Verify and reconcile.** Run the agreed batch, wait for final results and join them to source IDs. Preserve VALID, INVALID, CATCH_ALL, UNKNOWN, failed, excluded and pending independently. Verification is the product step; campaign drafts and business decisions are the skills output, and sending is a separate action.
 
 
@@ -75,3 +75,5 @@ Event invitations now use the [recipe in B2B Cold Outreach](https://github.com/E
 ## Latest QA review
 
 Read the [2026-09-29 QA review](QA-2026-09-29.md) for executed checks, repaired behavior, consolidation decisions and the exact live-testing boundary.
+
+The [2026-10-20 top-up review](QA-2026-10-20-TOP-UP.md) adds authenticated billing-interface observations and the one-time-credit decision path. It does not certify a completed purchase or balance settlement.

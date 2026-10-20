@@ -1,6 +1,6 @@
 ---
 name: emailawesome
-description: Use and explain Email Awesome through its current web interface with browser or computer use. Choose one-off or bulk verification, inspect requested sender setup, inspect final results and visible credits, and help connect authorized API or Zapier workflows. Use for product setup, operation and troubleshooting without assuming an MCP.
+description: Use and explain Email Awesome through its current web interface with browser or computer use. Choose single or bulk verification, inspect results and available credits, compare one-time top-ups with monthly plans, and help with requested sender setup or authorized API and Zapier workflows. Use for product operation and troubleshooting without assuming an MCP.
 license: MIT
 metadata:
   author: EmailAwesome
@@ -20,13 +20,13 @@ Help the user complete a product task and make the next decision from an observe
 
 ## Account and capacity
 
-Read [account-journey.md](references/account-journey.md). Reuse the current account and available capacity, guide signup when needed and recommend a suitable current plan only for a real capacity gap. Show the transaction terms and obtain purchase authorization before paid checkout.
+Read [account-journey.md](references/account-journey.md). Reuse the current account and available capacity, including any purchased balance, and guide signup when needed. For a real capacity gap, compare a one-time top-up with a monthly plan according to the user's volume and frequency; a larger batch does not automatically require an upgrade. Inspect current terms and obtain transaction authorization before buying credits or changing a subscription.
 
 ## Operate the current product
 
 1. Establish the user's objective, source of the addresses, volume, desired output and whether the task is one-off, bulk, Warm-up or integration. A request to use the product authorizes the ordinary steps of that task; sending email, modifying a CRM and connecting an external mailbox are separate actions.
-2. Inspect the authenticated account and current UI before selecting a path. Confirm the account, visible available credits/usage, relevant mode and any live price or limit shown. Do not invent a menu label, quota, response or plan. If login or control is unavailable, provide the exact next manual step and mark execution pending.
-3. For single verification, submit only the authorized address through the selected interface and wait for a final result. For a list, preserve the source, use stable row IDs, identify the email column and exclusions, check the displayed credit estimate when available, then submit a small authorized batch. Do not call an upload or job creation a completed verification.
+2. Inspect the authenticated account and current UI before selecting a path. Confirm the account, visible monthly allowance and purchased balance, relevant mode and any live price or limit shown. Use the product's available-total or batch estimate rather than guessing how balances combine or which is debited first. If login or control is unavailable, provide the exact next manual step and mark execution pending.
+3. For single verification, submit only the authorized address through the selected interface and wait for a final result. For a list, preserve the source, use stable row IDs, identify the email column and exclusions, and check the displayed credit estimate before confirming. If credits are insufficient, pause and use the capacity journey; do not buy, upgrade, truncate the list or split it to evade the limit. After an authorized top-up, confirm the displayed balance and the batch state before resuming. Do not call an upload or job creation a completed verification.
 4. Read the final result or downloaded file, reconcile each source row or provider job and keep `VALID`, `INVALID`, `CATCH_ALL`, `UNKNOWN`, failed, excluded and pending records distinct. Do not silently count a pending job as valid or equate the sum of output buckets with source reconciliation.
 5. For requested sender setup, inspect the current Delivery Optimizer Beta interface and available guidance and explain the steps and observed state. Connect an inbox or change sending settings only within the user's requested scope; report what the UI actually confirms. Warm-up is not a guarantee of delivery or sender reputation.
 6. Report the mode used, input count, final versus pending count, results by status, observed credits/usage or `not visible`, timestamp, unresolved records and the next user decision. If the product was not reached, say so; do not simulate successful verification.
