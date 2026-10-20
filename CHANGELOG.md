@@ -1,5 +1,11 @@
 # Changes
 
+## 2026-10-20 One-time top-up guidance
+
+- Compare one-time purchased credits with monthly plans for a genuine capacity gap, using the current account and volume context.
+- Inspect separate balances, current quantity tiers and terms; pause an oversized Bulk job before validation and re-check state after an approved payment.
+- Record the authenticated billing UI check without claiming payment, credit settlement or full Bulk top-up coverage.
+
 ## 2026-09-28
 
 - Add an explicit install, account, capacity and first-result journey.
