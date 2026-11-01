@@ -1,5 +1,11 @@
 # Changes
 
+## 2026-11-01 Documentation and connection review
+
+- Point API-contract review directly to the current official Validation API project when the developer portal's older introduction link is unavailable.
+- Record the current HubSpot-on-Zapier connection prerequisites and the closed legacy private-app creation path; preserve existing authorized connections and require an authorized administrator for a new connection when necessary.
+- Documentation and local checks only: no API request, live Zap change, permission change, upload, verification or purchase was performed.
+
 ## 2026-10-20 One-time top-up guidance
 
 - Compare one-time purchased credits with monthly plans for a genuine capacity gap, using the current account and volume context.
