@@ -1,5 +1,13 @@
 # Changes
 
+## 2026-11-02 Product-interface guidance
+
+- Align the product contract with the current Bulk CSV interface and local TXT-to-CSV preparation.
+- Check for an existing suitable API key before following key-creation copy; reuse credentials without revealing or replacing them.
+- Clarify accepted versus rejected Bulk submissions, per-address callbacks and prompt acknowledgement after callback validation.
+- Link directly to the current Validation API documentation. Keep the existing top-up journey and helper scripts unchanged.
+- Verified the relevant authenticated screens in read-only mode; no validation, upload, connection, credential change or purchase was performed. See [the QA scope](qa/2026-11-02/README.md).
+
 ## 2026-10-20 One-time top-up guidance
 
 - Compare one-time purchased credits with monthly plans for a genuine capacity gap, using the current account and volume context.
