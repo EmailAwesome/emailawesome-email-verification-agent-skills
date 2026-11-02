@@ -1,8 +1,15 @@
 # Changes
 
-## 2026-11-01 Documentation and connection review
+## 2026-11-02 Product-interface guidance
 
-- Point API-contract review directly to the current official Validation API project when the developer portal's older introduction link is unavailable.
+- Align the product contract with the current Bulk CSV interface and local TXT-to-CSV preparation.
+- Check for an existing suitable API key before following key-creation copy; reuse credentials without revealing or replacing them.
+- Clarify accepted versus rejected Bulk submissions, per-address callbacks and prompt acknowledgement after callback validation.
+- Link directly to the current Validation API documentation. Keep the existing top-up journey and helper scripts unchanged.
+- Verified the relevant authenticated screens in read-only mode; no validation, upload, connection, credential change or purchase was performed. See [the QA scope](qa/2026-11-02/README.md).
+
+## 2026-11-01 HubSpot connection review
+
 - Record the current HubSpot-on-Zapier connection prerequisites and the closed legacy private-app creation path; preserve existing authorized connections and require an authorized administrator for a new connection when necessary.
 - Documentation and local checks only: no API request, live Zap change, permission change, upload, verification or purchase was performed.
 
