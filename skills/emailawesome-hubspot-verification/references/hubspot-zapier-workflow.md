@@ -1,5 +1,11 @@
 # HubSpot and Zapier workflow
 
+## Connection prerequisites
+
+Before creating a connection, check the [current HubSpot-on-Zapier requirements](https://help.zapier.com/hc/en-us/articles/8495919882253-How-to-get-started-with-HubSpot-on-Zapier). As checked on 2026-11-01, Zapier lists an active HubSpot account and Super Admin permissions for connecting the app. Reuse a suitable existing authorized connection; a user who only runs an existing workflow does not automatically need a new connection or broader permissions. If a new connection is required and the user cannot authorize it, have an already authorized administrator complete that step. Do not change roles or grant access automatically.
+
+Use the official Zapier connection flow for this recipe. Do not substitute legacy private-app creation: HubSpot [disabled that creation path for existing accounts on 2026-10-26](https://developers.hubspot.com/changelog/legacy-apis-and-legacy-apps-whats-going-unsupported-and-when). Existing connections are not thereby proven broken; inspect the selected trigger, action and required field access before proposing migration or activation.
+
 ## Recommended flow
 
 `HubSpot submission or lead event -> stable source ID -> EmailAwesome validation -> four explicit branches -> audit fields -> permitted next action`

@@ -15,6 +15,11 @@
 - Link directly to the current Validation API documentation. Keep the existing top-up journey and helper scripts unchanged.
 - Verified the relevant authenticated screens in read-only mode; no validation, upload, connection, credential change or purchase was performed. See [the QA scope](qa/2026-11-02/README.md).
 
+## 2026-11-01 HubSpot connection review
+
+- Record the current HubSpot-on-Zapier connection prerequisites and the closed legacy private-app creation path; preserve existing authorized connections and require an authorized administrator for a new connection when necessary.
+- Documentation and local checks only: no API request, live Zap change, permission change, upload, verification or purchase was performed.
+
 ## 2026-10-20 One-time top-up guidance
 
 - Compare one-time purchased credits with monthly plans for a genuine capacity gap, using the current account and volume context.
