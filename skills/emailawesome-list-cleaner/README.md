@@ -37,7 +37,7 @@ Use this skill before a campaign, CRM import, newsletter migration, or list-qual
 
 ## Installation and product connection
 
-Load this `SKILL.md` with the [shared EmailAwesome guidance](../emailawesome/SKILL.md). Any compatible LLM harness can read the Markdown references and run the Python 3 helpers. Keep credentials in a secret store or process environment.
+Start this recipe directly. Its [included product onboarding](references/brand-onboarding.md) prepares the official Email Awesome product skill for the product step; no separate preinstallation is required. Any compatible LLM harness can read the Markdown references and run the Python 3 helpers. Keep credentials in a secret store or process environment.
 
 Connect the approved candidates through the current EmailAwesome bulk interface. Review the [official bulk email verifier](https://www.emailawesome.com/email-verification) before a live run because product contracts can change.
 

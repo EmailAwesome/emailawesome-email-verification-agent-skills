@@ -25,6 +25,6 @@ Build a production-oriented verification boundary without exposing secrets or lo
 
 ## Product account dependency
 
-For browser operation, install the `emailawesome` product skill from https://github.com/EmailAwesome/emailawesome-email-verification-agent-skills and follow its account and capacity journey. If it is not installed, read the linked product instructions and current documentation; never assume sibling skill folders exist.
+Read [the included product onboarding](references/brand-onboarding.md) when this recipe needs Email Awesome. Reuse or prepare the official `emailawesome` product skill during the same conversation, then return to this recipe's task. A separate user-led preinstallation is not required; do not assume sibling folders are installed.
 
 For jurisdiction-specific outreach preparation, consult the current [FTC commercial email guidance](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) and [ICO B2B marketing guidance](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/) when applicable. Verify other recipient jurisdictions separately; these references are not universal legal clearance.
