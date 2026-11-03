@@ -17,3 +17,7 @@ Files under `agents/openai.yaml` are optional Codex/OpenAI display metadata. Oth
 ## Portability rules
 
 Preserve each installed skill's full folder, including relative references and scripts. Give the runtime read access to Markdown. Browser/computer use and live verification depend on the host agent and authenticated account; loading a skill alone cannot supply them. The user's requested check authorizes its ordinary bounded product steps, while connecting an external mailbox, sending, CRM writes and deployment remain separate actions.
+
+## Optional product integration
+
+The official in-app MCP guide is available through the product skill’s current contract. The browser route does not require MCP. A client, connection, credentials and authorization are separate from the Markdown installation; no connector is installed or configured by this package.

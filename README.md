@@ -2,10 +2,14 @@
 
 **Official Email Awesome agent skills** · Published and maintained by [EmailAwesome](https://github.com/EmailAwesome), the official Email Awesome GitHub organization. [Visit Email Awesome](https://www.emailawesome.com/).
 
-The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use Email Awesome without an MCP. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, inspects requested sender setup in the current interface, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
+The primary [emailawesome skill](skills/emailawesome/SKILL.md) helps an agent use the current Email Awesome interface and consult its optional official MCP setup guide. With authorized browser or computer use and an authenticated account, it chooses single or bulk verification, inspects requested sender setup in the current interface, reads final results and visible credits, and explains the next decision. When the agent cannot reach the account, it gives a concrete manual step and does not claim verification happened.
 
 Use it to check addresses or lists with [Email Awesome](https://www.emailawesome.com/), inspect final statuses, and decide which records need review. The skill supplies instructions; the agent still needs compatible browser tools and access to your authenticated account.
 
+
+## Current product surfaces
+
+The authenticated interface reviewed on 2026-11-03 includes [Contacts](https://app.emailawesome.com/contacts) for the user's own verified records and an official [AI agents (MCP) setup guide](https://app.emailawesome.com/integrations/mcp). Contacts is not a supplied prospect database. The guide's availability does not prove a configured or tested connection. The shared [product contract](skills/emailawesome/references/product-contract.md#interface-availability-observed-on-2026-11-03) records current limits, coming-soon integrations and the difference between observed UI and tested execution.
 
 ## Included in use-case onboarding
 

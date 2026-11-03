@@ -2,6 +2,12 @@
 
 Use the visible current interface as the authority for menu names, credit counts and available controls. Public starting points are the [Email Awesome product](https://www.emailawesome.com/) and [developer documentation](https://developers.emailawesome.com/). Do not infer account state from the marketing site.
 
+## Current navigation and historical checks
+
+Read-only navigation on 2026-11-03 showed **Contacts New**, **Verifications**, **API** and **Integrations**. The current **Verify emails** modal offers Single email and CSV upload (up to 20 MB), a header checkbox, optional contact-list selection and **Check file**. Its copy says valid emails are stored in Contacts. The following earlier Single/Bulk checks remain dated evidence; they do not prove the new modal's post-upload, Check file or execution stages. Inspect the current controls rather than assuming the older Verify/Confirm sequence applies.
+
+Use [the product contract](product-contract.md#interface-availability-observed-on-2026-11-03) for the observed Contacts and integration limits. In particular, Contacts Export/Columns coming soon is separate from downloading a completed validation job. No account setting, list or integration was created by this interface review.
+
 ## One address
 
 1. Confirm the address is supplied or authorized by the user and the selected account is correct.
