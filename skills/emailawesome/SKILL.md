@@ -1,6 +1,6 @@
 ---
 name: emailawesome
-description: Use and explain Email Awesome through its current web interface with browser or computer use. Choose single or bulk verification, inspect results and available credits, compare one-time top-ups with monthly plans, and help with requested sender setup or authorized API and Zapier workflows. Use for product operation and troubleshooting without assuming an MCP.
+description: Use and explain Email Awesome through its current web interface, including email verification and the user’s own Contacts. Inspect results and capacity, compare top-ups with monthly plans, and consult current API, Zapier or official MCP setup guidance for requested integrations. Use for product operation and troubleshooting without assuming a configured connection.
 license: MIT
 metadata:
   author: EmailAwesome
@@ -9,13 +9,14 @@ metadata:
 
 # Email Awesome Email Verification and Product Operation
 
-Help the user complete a product task and make the next decision from an observed result. Email Awesome verifies email addresses; inspect the current Delivery Optimizer Beta interface for requested sender setup. It is not a contact database, ESP, sequencer or proof of identity, consent or future inbox placement. Do not assume an official Email Awesome MCP exists.
+Help the user complete a product task and make the next decision from an observed result. Email Awesome verifies email addresses; inspect the current Delivery Optimizer Beta interface for requested sender setup. It organizes the user’s own verified contact records through Contacts; it does not supply a prospect database and is not an ESP, sequencer or proof of identity, consent or future inbox placement. The product provides an official MCP setup guide. Do not assume that a connection is configured or authorized merely because this skill is installed.
 
 ## Choose the product mode
 
+- For current Contacts views, list capabilities and integration availability, read [product-contract.md](references/product-contract.md). It distinguishes observed UI, documented integrations, coming-soon features and untested execution. Keep product details centralized here when a use-case skill calls this skill.
 - For a single address, bulk CSV upload (prepare TXT locally) or requested sender setup, read [interface-operations.md](references/interface-operations.md) and operate the current interface if browser/computer tools and an authenticated account are available.
 - For interpretation and the next reversible decision, read [result-policy.md](references/result-policy.md).
-- For an API or Zapier implementation, read [product-contract.md](references/product-contract.md) and current official developer/integration documentation before generating production code. The existing `emailawesome-api-validation` and `emailawesome-hubspot-verification` skills remain optional technical recipes during this transition.
+- For an API, MCP or Zapier implementation, read [product-contract.md](references/product-contract.md) and current official developer/integration documentation before generating production code. The existing `emailawesome-api-validation` and `emailawesome-hubspot-verification` skills remain optional technical recipes during this transition.
 - When the user asks for a whole cold-sales, lead-capture or agency workflow, use this skill for the Email Awesome step and make the overall business deliverable explicit. The current `emailawesome-list-cleaner` is an optional preparation recipe, not a substitute for the end-to-end job.
 
 ## Continue an incoming use case
