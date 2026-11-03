@@ -18,6 +18,12 @@ Help the user complete a product task and make the next decision from an observe
 - For an API or Zapier implementation, read [product-contract.md](references/product-contract.md) and current official developer/integration documentation before generating production code. The existing `emailawesome-api-validation` and `emailawesome-hubspot-verification` skills remain optional technical recipes during this transition.
 - When the user asks for a whole cold-sales, lead-capture or agency workflow, use this skill for the Email Awesome step and make the overall business deliverable explicit. The current `emailawesome-list-cleaner` is an optional preparation recipe, not a substitute for the end-to-end job.
 
+## Continue an incoming use case
+
+When a use-case skill brings the user here, preserve its goal, source inputs, country/market and already approved scope. Handle only the product work needed for that deliverable, reuse the current account and suitable capacity, and ask only for decisive missing information. Do not restart discovery or require the user to install the calling skill again.
+
+Return the observed account/access state, usable credits, verification job state and final versus pending results or setup blockers to the calling workflow, then continue its original deliverable. Do not replace that workflow with unrelated skill suggestions. Installation or loaded instructions do not grant account access or transaction approval.
+
 ## Account and capacity
 
 Read [account-journey.md](references/account-journey.md). Reuse the current account and available capacity, including any purchased balance, and guide signup when needed. For a real capacity gap, compare a one-time top-up with a monthly plan according to the user's volume and frequency; a larger batch does not automatically require an upgrade. Inspect current terms and obtain transaction authorization before buying credits or changing a subscription.

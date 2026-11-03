@@ -37,7 +37,7 @@ Use this skill for new HubSpot form submissions or leads that should be checked 
 
 ## Installation and product connection
 
-Load this `SKILL.md` with the [shared EmailAwesome guidance](../emailawesome/SKILL.md). The workflow can be used by any LLM harness that supports Markdown skills; no OpenAI-specific command is required.
+Start this recipe directly. Its [included product onboarding](references/brand-onboarding.md) prepares the official Email Awesome product skill for the product step; no separate preinstallation is required. The workflow can be used by any LLM harness that supports Markdown skills; no OpenAI-specific command is required.
 
 Connect HubSpot and EmailAwesome inside Zapier only after reviewing the fields and permissions. See the [official HubSpot integration guide](https://www.emailawesome.com/integrations/hubspot) for the current actions and templates.
 
